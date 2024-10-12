@@ -1,0 +1,8 @@
+---
+import { getEntry } from "astro:content";
+const entry = await getEntry("blog", "second-post");
+const { Content, headings } = await entry.render();
+---
+
+<p>公開日: {entry.data.pubDate.toDateString()}</p>
+<Content />
