@@ -1,0 +1,54 @@
+---
+title: "なんでブログを初めた？？"
+description: |
+  文章が上手い奴は頭がいいがおれは文章が下手だ
+pubDate: "2024/10/13"
+heroImage: "/blog-placeholder-3.jpg"
+---
+
+## 文章が上手い奴は頭がいい
+
+おれは「文章が上手い奴は頭がいい」って確信している。そしておれは文章が下手だ。
+
+そもそも書けない、というか書こうともしない。そしてどうしようもなくバカだ。  
+大切なことを文章を書くという営みの中に置き去りにしてしまったんだと思う。  
+だから、ブログを始める。
+
+```ts code-block.ts
+import type { Code, Paragraph } from "mdast";
+import type { Plugin } from "unified";
+import type { Node } from "unist";
+import { visit, type Visitor } from "unist-util-visit";
+const remarkCodeBlock: Plugin = () => {
+  return (tree: Node) => {
+    const visitor: Visitor<Code> = (node, index, parent) => {
+      if (!parent || index === undefined) {
+        return;
+      }
+
+      const { lang, meta, value } = node;
+      const title = meta;
+
+      parent.children.splice(index, 1, {
+        type: "paragraph",
+        data: {
+          hName: "code-block",
+          hProperties: {
+            // Workaround for preventing loss of line breaks in code blocks.
+            // Need to decode the value in the code block component.
+            code: encodeURIComponent(value),
+            ...(lang ? { lang } : {}),
+            ...(title ? { title } : {}),
+          },
+        },
+        children: [],
+      } as Paragraph);
+    };
+    visit(tree, "code", visitor);
+  };
+};
+
+export default remarkCodeBlock;
+```
+
+**PS:** 頭がいいけど文章が下手な人間は知ってる。

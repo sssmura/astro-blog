@@ -5,8 +5,6 @@ import Footer from "../components/Footer.astro";
 import PostCard from "../components/PostCard.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
-import FormattedDate from "../components/FormattedDate.astro";
-
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
@@ -20,7 +18,7 @@ const posts = (await getCollection("blog")).sort(
   <body>
     <Header />
     <main class="white">
-      <section class="te">
+      <section class="divide-slate-50">
         <ul>
           {
             posts.map((post) => (
@@ -35,4 +33,3 @@ const posts = (await getCollection("blog")).sort(
     <Footer />
   </body>
 </html>
-http://127.0.0.1:4321/using-mdx/

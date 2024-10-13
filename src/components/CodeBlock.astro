@@ -1,0 +1,30 @@
+---
+import { Code } from "astro:components";
+import { type BuiltinLanguage, type SpecialLanguage } from "shikiji";
+
+interface Props {
+  lang?: string;
+  title?: string;
+  code: string;
+}
+
+const { lang, title, code } = Astro.props;
+---
+
+<figure>
+  {title && <figcaption>{title}</figcaption>}
+  <Code
+    class={"code-block"}
+    lang={lang as BuiltinLanguage | SpecialLanguage | undefined}
+    code={decodeURIComponent(code)}
+    theme="github-light"
+  />
+</figure>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const codeElement = document.querySelector("code");
+    codeElement?.addEventListener("click", () => {
+      navigator.clipboard.writeText(codeElement.textContent as string);
+    });
+  });
+</script>
