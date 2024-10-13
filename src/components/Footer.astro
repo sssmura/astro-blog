@@ -17,7 +17,12 @@ import { GITHUB_URL } from "../consts";
     </a>
     <a href={GITHUB_URL} target="_blank">
       <span class="sr-only">Go to Astro's GitHub repo</span>
-      <img src="/github.svg" alt="GitHub" width="32" height="32" />
+      <img
+        src={import.meta.env.BASE_URL + "/github.svg"}
+        alt="GitHub"
+        width="32"
+        height="32"
+      />
     </a>
   </div>
 </footer>

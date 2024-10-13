@@ -8,8 +8,6 @@ import remarkCodeBlock from "./src/remark/code-block";
 export default defineConfig({
     site: 'https://sssmura.github.io',
     base: '/astro-blog',
-
-
     integrations: [mdx(), sitemap(), tailwind()],
     markdown: {
         remarkPlugins: [remarkCodeBlock]
