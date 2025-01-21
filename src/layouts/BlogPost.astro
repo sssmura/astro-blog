@@ -1,39 +1,15 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import Main from "./Main.astro"; // Import Main.astro
 
 type Props = CollectionEntry<"blog">["data"];
 const { title, description, pubDate, updatedDate } = Astro.props;
 ---
 
-<!--
- デザインの指示
-レスポンシブ対応のデザインにする
-記事本体の幅をレスポンシブにする
-UX的に読みやすい幅にする
-articleを親要素として、子要素を中央寄せにする
-   
-  
-  
-  -->
 <html lang="en">
-  <head>
-    <BaseHead title={title} description={description} />
-  </head>
-
-  <body>
-    <Header />
-    <main>
-      <!-- articleの子要素を中央寄せにする -->
-      <!--
-       tailwindでレスポンシブを実現するには
-        デバイスの幅に応じて、幅を変えるためには、max-w-3xlを使う
-
-         -->
-
+ <body>
+    <Main>
       <article class="">
         <div
           class="article
@@ -64,7 +40,6 @@ articleを親要素として、子要素を中央寄せにする
           <slot />
         </div>
       </article>
-    </main>
-    <Footer />
+    </Main>
   </body>
 </html>

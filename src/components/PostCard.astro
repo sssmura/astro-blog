@@ -6,48 +6,16 @@ const { post } = Astro.props as {
 };
 ---
 
-<!-- //ポスターカードのコンポーネント --><!--
- tailwindcssのスタイルのデザイン
- １：div
-スタイルの指示
-- テキストを中央揃えにする
-- カードに境界線を追加する
-- カードの背景色を白に設定する
-- シンプル
-- 影不要
--  平面的
-- ホバーで色を変える（ UIてきに優れている変化、リンクであることがわかるように）
-2 a
-- リンクのスタイルを削除する
-3 h4
-- タイトルのスタイルを設定する
-- テキストを中央揃えにする
-- フォントサイズを大きくする  
-- フォントの太さを太くする
-
-4 p
-- 日付のスタイルを設定するｄさ
-- テキストを中央揃えにする
-- フォントの色をタイトルとは異なる色にする
-- フォントサイズを小さくする
-
- -->
 <div
-  class="p-4 border border-gray-200 bg-white hover:bg-gray-100 transition-colors"
+  class="p-4 border border-gray-200 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 "
   style="border-radius: 0.5rem;"
 >
   <a href={post.slug}>
-    <h4 class="text-center
-    text-2xl font-bold">{post.data.title}</h4>
-    <!-- ここに記事説明 -->
-    <p class="text-center
-      text-gray-500
-      text-sm">
+    <h4 class="text-center text-2xl font-bold text-black dark:text-white transition-colors duration-300">{post.data.title}</h4>
+    <p class="text-center text-gray-500 text-sm dark:text-gray-400 ">
       {post.data.description}
     </p>
-    <p class="text-center
-    text-gray-500
-    text-sm">
+    <p class="text-center text-gray-500 text-sm dark:text-gray-400 t">
       <FormattedDate date={post.data.pubDate} />
     </p>
   </a>

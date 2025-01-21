@@ -1,0 +1,36 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        <script is:inline>
+            // localStorageにデータがあるときはそちらを適用
+            if (typeof window.localStorage.getItem('theme') === 'string') {
+              const currentTheme = window.localStorage.getItem('theme');
+              if (currentTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+              }
+            }
+            // localStorageになにもない時はmatchMediaで判定
+            if (
+              typeof window.localStorage.getItem('theme') !== 'string' &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches
+            ) {
+              document.documentElement.classList.add('dark');
+            }
+          </script>
+        <main class="white">
+            <slot />
+        </main>
+        <Footer />
+    </body>
+</html>
